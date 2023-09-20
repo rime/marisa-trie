@@ -30,16 +30,44 @@ include_directories(
   ${MARISA_INCLUDE_DIRS}
 )
 
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+
+configure_package_config_file(
+  marisa-config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/marisa-config.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/marisa
+  PATH_VARS CMAKE_INSTALL_INCLUDEDIR
+)
+
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/marisa-version.cmake
+  COMPATIBILITY SameMajorVersion
+)
+
 add_library(marisa
     ${MARISA_SRC}
 )
 
 install(TARGETS marisa
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+        EXPORT marisa-targets
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 set(include_headers ${MARISA_ROOT}/include/marisa.h)
 file(GLOB libmarisa_include_headers ${MARISA_ROOT}/include/marisa/*.h)
 install(FILES ${include_headers} DESTINATION include)
 install(FILES ${libmarisa_include_headers} DESTINATION include/marisa)
+
+install(
+  EXPORT marisa-targets
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/marisa
+)
+
+install(
+  FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/marisa-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/marisa-version.cmake
+  DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}/cmake/marisa)
