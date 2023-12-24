@@ -71,6 +71,15 @@ install(
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/marisa
 )
 
+configure_file(marisa.pc.in "${CMAKE_CURRENT_BINARY_DIR}/marisa.pc" @ONLY)
+
+install(
+  FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/marisa.pc"
+  DESTINATION
+    "${CMAKE_INSTALL_LIBDIR}/pkgconfig"
+)
+
 install(
   FILES
     ${CMAKE_CURRENT_BINARY_DIR}/marisa-config.cmake
