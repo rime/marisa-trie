@@ -1,11 +1,11 @@
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-bindir=@bindir@
-libdir=@libdir@
-includedir=@includedir@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+bindir=${exec_prefix}/bin
+libdir=@CMAKE_INSTALL_FULL_LIBDIR@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
 
 Name: Marisa
 Description: Matching Algorithm with Recursively Implemented StorAge
-Version: @VERSION@
+Version: @CMAKE_PROJECT_VERSION@
 Cflags: -I${includedir}
 Libs: -L${libdir} -lmarisa
