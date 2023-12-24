@@ -4,6 +4,8 @@ project(marisa VERSION 0.2.6)
 # Official repo: https://github.com/s-yata/marisa-trie
 # CMake script borrowed from https://github.com/Karry/osmscout-sailfish/blob/master/CMakeLists.txt
 
+option(BUILD_TOOLS "Enable marisa tools" ON)
+
 if(UNIX)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Weffc++ -Wextra -Wconversion")
 endif()
@@ -75,3 +77,7 @@ install(
     ${CMAKE_CURRENT_BINARY_DIR}/marisa-version.cmake
   DESTINATION
     ${CMAKE_INSTALL_LIBDIR}/cmake/marisa)
+
+if(BUILD_TOOLS)
+  add_subdirectory(tools)
+endif()
