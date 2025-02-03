@@ -59,8 +59,8 @@ install(TARGETS marisa
 
 set(include_headers ${MARISA_ROOT}/include/marisa.h)
 file(GLOB libmarisa_include_headers ${MARISA_ROOT}/include/marisa/*.h)
-install(FILES ${include_headers} DESTINATION include)
-install(FILES ${libmarisa_include_headers} DESTINATION include/marisa)
+install(FILES ${include_headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES ${libmarisa_include_headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/marisa)
 target_include_directories(marisa PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
